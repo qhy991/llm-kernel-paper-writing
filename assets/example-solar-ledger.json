@@ -1,0 +1,161 @@
+{
+  "paper_contract": {
+    "paper_type": "performance-analysis",
+    "research_question": "Can validated analytical SOL bounds be derived automatically from PyTorch and JAX source programs?",
+    "research_object": "source-to-SOL analysis pipeline",
+    "hard_constraints": [
+      "source-program semantics must be validated before analytical lifting",
+      "the bound must be workload- and hardware-specific"
+    ],
+    "central_tension": "Optimization needs analytical ceilings, but existing counters and profilers do not automatically derive validated theoretical bounds from source code.",
+    "mechanistic_insight": "Confine the generative model to an executable and numerically verifiable translation, then use deterministic lifting and analysis.",
+    "main_claim": "A validated generative-to-deterministic pipeline can derive multi-fidelity SOL bounds with broad source coverage on the evaluated workloads.",
+    "intended_venue": "not applicable: source-paper reverse-engineering example",
+    "artifacts": [
+      "arXiv:2606.26383 HTML",
+      "Figure 1",
+      "Figure 2",
+      "KernelBench evaluation"
+    ],
+    "claim_exclusions": [
+      "The evaluation does not establish universal coverage for arbitrary Python programs.",
+      "Analytical bounds are not measured achieved runtimes."
+    ]
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "claim_type": "outcome",
+      "text": "SOLAR separates a verifiable generative translation from deterministic analysis to derive multi-fidelity SOL bounds on the evaluated source programs.",
+      "scope": {
+        "workloads": [
+          "KernelBench",
+          "evaluated JAX/Flax models",
+          "evaluated robotics workloads"
+        ],
+        "hardware": [
+          "hardware targets reported in arXiv:2606.26383"
+        ],
+        "precision": [
+          "precisions reported per evaluated workload"
+        ],
+        "software": [
+          "PyTorch and JAX source frontends"
+        ],
+        "budget": "analysis pipeline budget reported by the paper",
+        "selection_rule": "all workloads included in the paper's reported evaluation"
+      },
+      "evidence": [
+        {
+          "location": "arXiv:2606.26383 §1 and Figure 2",
+          "kind": "method text and worked example",
+          "observation": "The LLM lowers source to executable Affine Loop IR, output comparison validates the translation, and deterministic stages lift to an Einsum graph and compute bounds.",
+          "provenance": "primary"
+        },
+        {
+          "location": "arXiv:2606.26383 §4 and Figure 3",
+          "kind": "evaluation text and quantitative figure",
+          "observation": "The paper reports headroom analysis across KernelBench and JAX/Flax workloads.",
+          "provenance": "primary"
+        }
+      ],
+      "mechanism_status": "direct",
+      "counterevidence": [
+        "Coverage is measured on the reported operator and model corpus rather than arbitrary source programs."
+      ],
+      "boundary": "The claim is limited to the supported source constructs, operators, hardware models, and validation protocol reported in the paper."
+    }
+  ],
+  "terms": [
+    {
+      "term_en": "Speed-of-Light bound",
+      "term_zh": "理论最短执行时间界",
+      "class": "canonical_concept",
+      "scope": "workload- and architecture-specific analytical performance modeling under the stated compute and traffic assumptions",
+      "paper_id": "2606.26383",
+      "evidence_location": "§1 and §3.3",
+      "source_wording": "theoretical minimum execution time on a given architecture",
+      "operational_definition": "A workload- and architecture-specific analytical minimum execution time under the paper's compute and traffic model.",
+      "metric_or_test": "Compare achieved runtime with unfused, fused, or cache-aware SOL time.",
+      "synonyms": [
+        "SOL bound"
+      ],
+      "not_equivalent_to": [
+        "measured runtime",
+        "profiler output",
+        "peak FLOP/s alone"
+      ],
+      "confidence": "direct"
+    },
+    {
+      "term_en": "Validated Agentic Lowering",
+      "term_zh": "经验证的智能体降级",
+      "class": "author_defined",
+      "scope": "SOLAR's supported PyTorch/JAX source-to-Affine-Loop-IR translation and numerical comparison protocol",
+      "paper_id": "2606.26383",
+      "evidence_location": "§3.1 and Figure 2",
+      "source_wording": "an LLM translates source code into an executable Affine Loop IR, where correctness can be verified by numerical output comparison",
+      "operational_definition": "The LLM performs source-to-IR translation, and the resulting executable IR is accepted only after numerical comparison with the source program.",
+      "metric_or_test": "Numerical output comparison and reported analysis coverage.",
+      "synonyms": [],
+      "not_equivalent_to": [
+        "unverified code generation",
+        "deterministic SOL computation",
+        "formal proof of source equivalence"
+      ],
+      "confidence": "direct"
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "E1",
+      "claim_ids": [
+        "C1"
+      ],
+      "workload": "KernelBench workloads reported in the paper",
+      "input_shapes": "paper-provided KernelBench shapes",
+      "hardware": "hardware targets reported in the evaluation",
+      "software_stack": "PyTorch/JAX frontends and SOLAR pipeline versions reported by the paper",
+      "precision": "per-workload precision reported by the paper",
+      "baseline": "measured framework runtime and alternative SOL fidelity levels",
+      "baseline_mode": "measured achieved runtime versus analytical bound",
+      "correctness_gate": "source and executable IR numerical output comparison",
+      "budget": "not a search comparison; analysis coverage over the reported corpus",
+      "warmup": "use the paper's runtime protocol for achieved-runtime measurements",
+      "repeats": "use the paper's reported repetition protocol",
+      "aggregation": "per-workload ratios and reported geometric means",
+      "metric": "runtime divided by SOL time, plus analysis coverage",
+      "uncertainty": "retain any uncertainty or measurement procedure reported by the paper",
+      "exclusions": "unsupported source constructs and operators"
+    }
+  ],
+  "figures": [
+    {
+      "id": "F1",
+      "claim_id": "C1",
+      "role": "motivation",
+      "five_second_takeaway": "Points far below the runtime-equals-SOL diagonal have large optimization headroom.",
+      "evidence_source": "arXiv:2606.26383 Figure 1(a)",
+      "comparison_objects": [
+        "best measured PyTorch runtime",
+        "fused SOL runtime"
+      ],
+      "visual_anchor": "runtime equals SOL diagonal",
+      "conditions": "KernelBench workload and hardware conditions reported in the caption",
+      "uncertainty": "not applicable to the analytical diagonal; runtime protocol follows the paper",
+      "caption_conclusion": "The distance to the diagonal visualizes remaining optimization headroom under the fused SOL model."
+    }
+  ],
+  "limitations": [
+    {
+      "id": "L1",
+      "claim_ids": [
+        "C1"
+      ],
+      "class": "coverage_gap",
+      "observation": "The evaluated source/operator corpus does not cover arbitrary programs or all hardware effects.",
+      "claim_boundary": "Do not generalize reported coverage or bound tightness beyond supported constructs and model assumptions.",
+      "evidence_needed": "Additional source-language constructs, operators, hardware calibrations, and bound-validation cases."
+    }
+  ]
+}

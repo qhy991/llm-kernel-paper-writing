@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Kernel Paper Writing"
+  short_description: "Evidence-grounded writing for kernel research"
+  default_prompt: "Use $llm-kernel-paper-writing to turn my kernel research artifacts into a scoped claim-evidence plan and paper draft."

@@ -1,0 +1,105 @@
+{
+  "paper_contract": {
+    "paper_type": "",
+    "research_question": "",
+    "research_object": "",
+    "hard_constraints": [],
+    "central_tension": "",
+    "mechanistic_insight": "",
+    "main_claim": "",
+    "intended_venue": "",
+    "artifacts": [],
+    "claim_exclusions": []
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "claim_type": "outcome",
+      "text": "",
+      "scope": {
+        "workloads": [],
+        "hardware": [],
+        "precision": [],
+        "software": [],
+        "budget": "",
+        "selection_rule": ""
+      },
+      "evidence": [
+        {
+          "location": "",
+          "kind": "",
+          "observation": "",
+          "provenance": "primary"
+        }
+      ],
+      "mechanism_status": "direct",
+      "counterevidence": [],
+      "boundary": ""
+    }
+  ],
+  "terms": [
+    {
+      "term_en": "",
+      "term_zh": "",
+      "class": "canonical_concept",
+      "scope": "",
+      "paper_id": "",
+      "evidence_location": "",
+      "source_wording": "",
+      "operational_definition": "",
+      "metric_or_test": "",
+      "synonyms": [],
+      "not_equivalent_to": [],
+      "confidence": "candidate"
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "E1",
+      "claim_ids": [
+        "C1"
+      ],
+      "workload": "",
+      "input_shapes": "",
+      "hardware": "",
+      "software_stack": "",
+      "precision": "",
+      "baseline": "",
+      "baseline_mode": "",
+      "correctness_gate": "",
+      "budget": "",
+      "warmup": "",
+      "repeats": "",
+      "aggregation": "",
+      "metric": "",
+      "uncertainty": "",
+      "exclusions": ""
+    }
+  ],
+  "figures": [
+    {
+      "id": "F1",
+      "claim_id": "C1",
+      "role": "mechanism",
+      "five_second_takeaway": "",
+      "evidence_source": "",
+      "comparison_objects": [],
+      "visual_anchor": "",
+      "conditions": "",
+      "uncertainty": "",
+      "caption_conclusion": ""
+    }
+  ],
+  "limitations": [
+    {
+      "id": "L1",
+      "claim_ids": [
+        "C1"
+      ],
+      "class": "coverage_gap",
+      "observation": "",
+      "claim_boundary": "",
+      "evidence_needed": ""
+    }
+  ]
+}
