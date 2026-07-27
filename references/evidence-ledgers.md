@@ -3,16 +3,6 @@
 The ledgers are the interface between reading and writing. Populate them before
 drafting paragraphs.
 
-## Contents
-
-- [Paper contract](#paper-contract)
-- [Claim ledger](#claim-ledger)
-- [Term ledger](#term-ledger)
-- [Comparison ledger](#comparison-ledger)
-- [Figure ledger](#figure-ledger)
-- [Limitation ledger](#limitation-ledger)
-- [Evidence promotion gate](#evidence-promotion-gate)
-
 ## Paper contract
 
 Required fields:
@@ -26,9 +16,12 @@ Required fields:
 - `central_tension`: one observable contradiction or failure;
 - `mechanistic_insight`: one sentence, not a component list;
 - `main_claim`: one falsifiable scoped statement;
+- `argument_checksum`: four compact statements naming the judgment, evidence
+  gap, treatment, and scoped headline finding;
 - `intended_venue`: venue or audience whose evidence standard is being targeted;
 - `artifacts`: code, definitions, logs, results, profiles, traces, figures;
-- `claim_exclusions`: what the paper will not claim.
+- `claim_exclusions`: internal boundary checks for what the paper will not
+  imply. Do not paste these entries into the prose as repeated disclaimers.
 
 ## Claim ledger
 
@@ -101,7 +94,42 @@ Rules:
 - Claim language must be replaced by its operational test.
 - A term without `not_equivalent_to` is likely too vague.
 
-## Comparison ledger
+## Literature-positioning ledger
+
+Keep literature positioning separate from experimental comparisons. One row
+represents one retained paper:
+
+```json
+{
+  "id": "RW1",
+  "work": "Paper title, stable identifier, and version",
+  "proximity": "nearest-neighbor|foundational|recent-route|baseline-only",
+  "research_question": "",
+  "assumptions": [],
+  "mechanism": "",
+  "evaluation": "",
+  "main_finding": "",
+  "boundary": "",
+  "relation_to_this_paper": "",
+  "citation_location": "",
+  "baseline_implication": ""
+}
+```
+
+Rules:
+
+- Start with nearest neighbors: the same problem, target condition, or claim.
+- Record mechanism, result, and boundary from the primary source.
+- `relation_to_this_paper` names the changed decision, authority boundary,
+  condition, or missing evidence; different component names are insufficient.
+- `citation_location` must support the specific comparison.
+- `baseline_implication` states either why the work should be evaluated as a
+  baseline or which mismatch prevents a fair comparison.
+- Group final prose by research route after the matrix is stable.
+- Absence claims such as “first,” “no work,” and “few studies” require a
+  documented search basis beyond the matrix.
+
+## Experimental-comparison ledger
 
 ```json
 {

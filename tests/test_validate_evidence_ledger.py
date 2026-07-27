@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -32,6 +33,30 @@ class EvidenceLedgerTests(unittest.TestCase):
         self.assertIn("paper_contract.paper_type: must be filled", result.stdout)
         summary = json.loads(result.stdout.splitlines()[-1])
         self.assertGreater(summary["errors"], 0)
+
+    def test_argument_checksum_is_required(self) -> None:
+        data = json.loads(
+            (ROOT / "assets" / "example-solar-ledger.json").read_text()
+        )
+        del data["paper_contract"]["argument_checksum"]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            ledger = Path(tmpdir) / "ledger.json"
+            ledger.write_text(json.dumps(data))
+            result = self.run_validator(ledger)
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("paper_contract.argument_checksum", result.stdout)
+
+    def test_literature_positioning_is_required(self) -> None:
+        data = json.loads(
+            (ROOT / "assets" / "example-solar-ledger.json").read_text()
+        )
+        del data["positioning"]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            ledger = Path(tmpdir) / "ledger.json"
+            ledger.write_text(json.dumps(data))
+            result = self.run_validator(ledger)
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("positioning", result.stdout)
 
 
 if __name__ == "__main__":

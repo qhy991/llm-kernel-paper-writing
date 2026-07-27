@@ -17,6 +17,8 @@ LLM Kernel Paper Writing 是一个开放的 Agent Skill 和小型确定性工具
 ## 包含内容
 
 - [`SKILL.md`](SKILL.md) 中的完整写作工作流；
+- 对齐摘要、Introduction、Related Work、贡献与结论的四句 argument checksum；
+- 与实验比较协议分离的 nearest-neighbor 文献定位矩阵；
 - 模型训练、Agent/Search、编译与验证、Benchmark、性能分析五类 playbook；
 - Paper Contract 和严格的 claim-evidence ledger；
 - canonical concept、proper name、author-defined construct、metric 与
@@ -25,6 +27,7 @@ LLM Kernel Paper Writing 是一个开放的 Agent Skill 和小型确定性工具
 - 基于 arXiv HTML 的证据提取器，保留章节位置、caption、上下文、哈希和
   candidate 状态；
 - 在写正文前阻止缺失范围、基线、证据或限制项的确定性校验器；
+- 在保留必要科学边界的同时，清理防御性 AI 文风的宏观优先审计；
 - 公开语料清单和基于一手 arXiv 来源的完整案例。
 
 ## 工作流
@@ -32,8 +35,10 @@ LLM Kernel Paper Writing 是一个开放的 Agent Skill 和小型确定性工具
 ```text
 研究材料
   -> Paper Contract
+  -> 判断 / 证据缺口 / 处理方式 / 核心发现 checksum
   -> 一手来源证据
-  -> claim / term / comparison ledgers
+  -> 文献 positioning matrix
+  -> claim / term / 实验 comparison ledgers
   -> 论文论证链
   -> 表格与图片计划
   -> 有边界的正文

@@ -7,6 +7,12 @@
     "central_tension": "",
     "mechanistic_insight": "",
     "main_claim": "",
+    "argument_checksum": {
+      "judgment": "",
+      "evidence_gap": "",
+      "treatment": "",
+      "headline_finding": ""
+    },
     "intended_venue": "",
     "artifacts": [],
     "claim_exclusions": []
@@ -51,6 +57,22 @@
       "synonyms": [],
       "not_equivalent_to": [],
       "confidence": "candidate"
+    }
+  ],
+  "positioning": [
+    {
+      "id": "RW1",
+      "work": "",
+      "proximity": "nearest-neighbor",
+      "research_question": "",
+      "assumptions": [],
+      "mechanism": "",
+      "evaluation": "",
+      "main_finding": "",
+      "boundary": "",
+      "relation_to_this_paper": "",
+      "citation_location": "",
+      "baseline_implication": ""
     }
   ],
   "comparisons": [

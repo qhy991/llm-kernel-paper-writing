@@ -21,6 +21,10 @@ memory.
 ## What is included
 
 - A concise agent workflow in [`SKILL.md`](SKILL.md).
+- A four-statement argument checksum that aligns the abstract, Introduction,
+  Related Work, contributions, and conclusion.
+- Nearest-neighbor literature positioning kept separate from experimental
+  comparison protocols.
 - Paper-type playbooks for model training, agents/search, compilers and
   verification, benchmarks, and performance analysis.
 - A paper contract plus a strict claim-evidence ledger schema.
@@ -31,6 +35,8 @@ memory.
   figure context, hashes, and candidate status.
 - A deterministic ledger validator that blocks unsupported or underspecified
   claims before prose drafting.
+- A macro-first audit that removes defensive AI-writing residue without hiding
+  material scientific limitations.
 - A public corpus manifest and worked examples based on primary arXiv sources.
 
 ## Workflow
@@ -38,8 +44,10 @@ memory.
 ```text
 Research artifacts
   -> paper contract
+  -> judgment / evidence gap / treatment / finding checksum
   -> primary-source evidence
-  -> claim / term / comparison ledgers
+  -> literature positioning
+  -> claim / term / experimental-comparison ledgers
   -> argument chain
   -> table and figure plans
   -> scoped prose

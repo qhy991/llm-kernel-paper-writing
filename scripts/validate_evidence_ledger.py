@@ -26,6 +26,12 @@ TERM_CLASSES = {
     "claim_language",
 }
 TERM_CONFIDENCE = {"direct", "supported", "candidate"}
+POSITIONING_PROXIMITIES = {
+    "nearest-neighbor",
+    "foundational",
+    "recent-route",
+    "baseline-only",
+}
 FIGURE_ROLES = {"motivation", "mechanism", "result", "diagnosis", "boundary"}
 LIMITATION_CLASSES = {
     "observed_regression",
@@ -76,6 +82,7 @@ def validate_contract(v: Validator, contract: Any) -> None:
         "central_tension",
         "mechanistic_insight",
         "main_claim",
+        "argument_checksum",
         "intended_venue",
         "artifacts",
         "claim_exclusions",
@@ -90,6 +97,16 @@ def validate_contract(v: Validator, contract: Any) -> None:
         "paper_contract.paper_type",
         f"must be one of {sorted(PAPER_TYPES)}",
     )
+    checksum = contract.get("argument_checksum")
+    checksum_keys = ["judgment", "evidence_gap", "treatment", "headline_finding"]
+    v.required_keys(checksum, "paper_contract.argument_checksum", checksum_keys)
+    if isinstance(checksum, dict):
+        for key in checksum_keys:
+            v.require(
+                present(checksum.get(key)),
+                f"paper_contract.argument_checksum.{key}",
+                "must be filled before drafting the Introduction",
+            )
 
 
 def validate_claims(v: Validator, claims: Any) -> dict[str, str]:
@@ -231,6 +248,51 @@ def validate_terms(v: Validator, terms: Any) -> None:
             )
 
 
+def validate_positioning(v: Validator, positioning: Any) -> None:
+    v.require(
+        isinstance(positioning, list) and bool(positioning),
+        "positioning",
+        "must be a non-empty literature-positioning matrix",
+    )
+    if not isinstance(positioning, list):
+        return
+    required = [
+        "id",
+        "work",
+        "proximity",
+        "research_question",
+        "assumptions",
+        "mechanism",
+        "evaluation",
+        "main_finding",
+        "boundary",
+        "relation_to_this_paper",
+        "citation_location",
+        "baseline_implication",
+    ]
+    seen_ids: set[str] = set()
+    for index, item in enumerate(positioning):
+        path = f"positioning[{index}]"
+        v.required_keys(item, path, required)
+        if not isinstance(item, dict):
+            continue
+        for key in required:
+            v.require(
+                present(item.get(key)),
+                f"{path}.{key}",
+                "must be filled; use 'not applicable' with a reason if needed",
+            )
+        item_id = item.get("id")
+        v.require(item_id not in seen_ids, f"{path}.id", "must be unique")
+        if present(item_id):
+            seen_ids.add(str(item_id))
+        v.require(
+            item.get("proximity") in POSITIONING_PROXIMITIES,
+            f"{path}.proximity",
+            f"must be one of {sorted(POSITIONING_PROXIMITIES)}",
+        )
+
+
 def validate_comparisons(
     v: Validator, comparisons: Any, claim_ids: set[str]
 ) -> set[str]:
@@ -370,6 +432,7 @@ def validate(data: Any) -> Validator:
         "paper_contract",
         "claims",
         "terms",
+        "positioning",
         "comparisons",
         "figures",
         "limitations",
@@ -381,6 +444,7 @@ def validate(data: Any) -> Validator:
     claim_types = validate_claims(v, data.get("claims"))
     claim_ids = set(claim_types)
     validate_terms(v, data.get("terms"))
+    validate_positioning(v, data.get("positioning"))
     compared_claim_ids = validate_comparisons(
         v, data.get("comparisons"), claim_ids
     )

@@ -10,6 +10,12 @@
     "central_tension": "Optimization needs analytical ceilings, but existing counters and profilers do not automatically derive validated theoretical bounds from source code.",
     "mechanistic_insight": "Confine the generative model to an executable and numerically verifiable translation, then use deterministic lifting and analysis.",
     "main_claim": "A validated generative-to-deterministic pipeline can derive multi-fidelity SOL bounds with broad source coverage on the evaluated workloads.",
+    "argument_checksum": {
+      "judgment": "Determine how much optimization headroom a source program has under a stated workload and architecture.",
+      "evidence_gap": "Counters report achieved behavior and manual models cover selected cases, but neither automatically derives a validated analytical bound from source.",
+      "treatment": "Translate source into executable IR, validate its semantics, then compute the bound through deterministic lifting and analysis.",
+      "headline_finding": "On the reported supported programs, the pipeline derives multi-fidelity SOL bounds and exposes workload-specific headroom."
+    },
     "intended_venue": "not applicable: source-paper reverse-engineering example",
     "artifacts": [
       "arXiv:2606.26383 HTML",
@@ -104,6 +110,24 @@
         "formal proof of source equivalence"
       ],
       "confidence": "direct"
+    }
+  ],
+  "positioning": [
+    {
+      "id": "RW-NA",
+      "work": "Not applicable: this artifact reverse-engineers one source paper rather than drafting a competing paper.",
+      "proximity": "baseline-only",
+      "research_question": "Not applicable: no new Related Work section is authored in this worked ledger.",
+      "assumptions": [
+        "The example demonstrates evidence-ledger mechanics using SOLAR as the sole primary source."
+      ],
+      "mechanism": "Not applicable: literature mechanisms require additional primary sources.",
+      "evaluation": "Not applicable: no cross-paper comparison is made.",
+      "main_finding": "Not applicable: the example must not infer other papers' findings from SOLAR's summary.",
+      "boundary": "Populate real positioning rows before using this ledger to draft Related Work.",
+      "relation_to_this_paper": "Not applicable: SOLAR is the analyzed source, not a comparator to a new paper.",
+      "citation_location": "arXiv:2606.26383, used only as the source artifact for this example.",
+      "baseline_implication": "No baseline decision can be made without primary evidence from candidate comparator papers."
     }
   ],
   "comparisons": [

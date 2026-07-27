@@ -6,6 +6,12 @@
   "central_tension": "",
   "mechanistic_insight": "",
   "main_claim": "",
+  "argument_checksum": {
+    "judgment": "",
+    "evidence_gap": "",
+    "treatment": "",
+    "headline_finding": ""
+  },
   "intended_venue": "",
   "artifacts": [],
   "claim_exclusions": []

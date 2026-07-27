@@ -1,10 +1,5 @@
 # Worked examples
 
-## Contents
-
-- [K-Search method-paper skeleton](#example-1-turn-k-search-evidence-into-a-method-paper-skeleton)
-- [KernelBenchX benchmark skeleton](#example-2-turn-kernelbenchx-evidence-into-a-benchmark-skeleton)
-
 ## Example 1: turn K-Search evidence into a method-paper skeleton
 
 ### Raw primary evidence
@@ -107,6 +102,15 @@ distinction beyond multi-turn search.
    - generated-kernel mechanisms;
    - negative subgroups and cost.
 6. Limitations and conclusion.
+
+### Related Work gate
+
+The K-Search source alone is insufficient to draft its positioning against
+other methods. Before writing Related Work, retrieve the nearest program-space
+evolution and intent-level planning papers from their primary sources, populate
+one `positioning` row per paper, and decide which are directly comparable
+baselines. Do not turn K-Search's own summaries of other work into verified
+comparison claims.
 
 ## Example 2: turn KernelBenchX evidence into a benchmark skeleton
 
